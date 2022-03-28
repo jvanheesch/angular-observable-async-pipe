@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  public formeleOpvolgingStatus: boolean | null = null;
+
+  toggleFormeleOpvolging(): void {
+    this.formeleOpvolgingStatus = !this.formeleOpvolgingStatus;
+  }
 }
