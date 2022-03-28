@@ -1,5 +1,6 @@
 <ul class="btn-group left">
-  <li [ngClass]="formeleOpvolgingStatus ? 'dvl-formal' : ''" id="formopv">
+  <li [ngClass]="formeleOpvolgingStatus ? 'dvl-formal' : ''" id="formopv"
+      *ngIf="formeleOpvolgingStatus != null">
     <button class="button b0 bl1 pl1 rho dropdown small " (click)="toggleFormeleOpvolging()" aria-expanded="false">
       <span *ngIf="formeleOpvolgingStatus" class="icon-check"></span> Formele opvolging
     </button>
