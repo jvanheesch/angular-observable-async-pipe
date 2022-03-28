@@ -1,24 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormeleOpvolgingService} from "./formele-opvolging.service";
+import {Observable} from "rxjs";
+import {FormeleOpvolging} from "./formele-opvolging";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
-  public formeleOpvolgingStatus: boolean | null = null;
+export class AppComponent {
+  public formeleOpvolging$: Observable<FormeleOpvolging>;
 
   constructor(private formeleOpvolgingService: FormeleOpvolgingService) {
+    this.formeleOpvolging$ = this.formeleOpvolgingService.getFormeleOpvolging();
   }
 
-  ngOnInit(): void {
-    this.formeleOpvolgingService.getFormeleOpvolging()
-      .subscribe(s => this.formeleOpvolgingStatus = s.status);
-  }
-
-  toggleFormeleOpvolging(): void {
-    let nieuweStatus = !this.formeleOpvolgingStatus;
-    this.formeleOpvolgingService.wijzigFormeleOpvolging(nieuweStatus)
+  public setFormeleOpvolging(status: boolean): void {
+    this.formeleOpvolgingService.wijzigFormeleOpvolging(status)
       .subscribe();
   }
 }

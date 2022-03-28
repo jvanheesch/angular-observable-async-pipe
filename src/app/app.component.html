@@ -1,8 +1,8 @@
 <ul class="btn-group left">
-  <li [ngClass]="formeleOpvolgingStatus ? 'dvl-formal' : ''" id="formopv"
-      *ngIf="formeleOpvolgingStatus != null">
-    <button class="button b0 bl1 pl1 rho dropdown small " (click)="toggleFormeleOpvolging()" aria-expanded="false">
-      <span *ngIf="formeleOpvolgingStatus" class="icon-check"></span> Formele opvolging
+  <li [ngClass]="formeleOpvolging.status ? 'dvl-formal' : ''" id="formopv"
+      *ngIf="formeleOpvolging$ | async as formeleOpvolging">
+    <button class="button b0 bl1 pl1 rho dropdown small " (click)="setFormeleOpvolging(!formeleOpvolging.status)" aria-expanded="false">
+      <span *ngIf="formeleOpvolging.status" class="icon-check"></span> Formele opvolging
     </button>
   </li>
 </ul>
