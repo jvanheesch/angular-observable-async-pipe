@@ -1,21 +1,20 @@
 import {Injectable} from '@angular/core';
 import {delay, map, Observable, of, ReplaySubject} from "rxjs";
-import {FormeleOpvolging} from "./formele-opvolging";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormeleOpvolgingService {
-  private formeleOpvolgingSubject: ReplaySubject<FormeleOpvolging>;
+  private formeleOpvolgingSubject: ReplaySubject<boolean>;
 
   constructor() {
     // replace with http GET
-    let o = of({status: true})
+    let o = of(true)
       .pipe(delay(1000));
     this.formeleOpvolgingSubject = this.cacheable(o);
   }
 
-  public getFormeleOpvolging(): Observable<FormeleOpvolging> {
+  public getFormeleOpvolging(): Observable<boolean> {
     return this.formeleOpvolgingSubject;
   }
 
@@ -24,7 +23,7 @@ export class FormeleOpvolgingService {
     let o = of(null)
       .pipe(delay(1000));
     return o
-      .pipe(map(status200 => this.formeleOpvolgingSubject!.next({status: status})))
+      .pipe(map(status200 => this.formeleOpvolgingSubject!.next(status)))
   }
 
   private cacheable<T>(o: Observable<T>): ReplaySubject<T> {
